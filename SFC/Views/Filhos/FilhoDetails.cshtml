@@ -1,0 +1,99 @@
+﻿@model SFC.Models.SFC.Paiis.Filhos
+
+@{
+    ViewBag.Title = "FilhoDetails";
+}
+
+<h2>Detalhes de @Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nome do Pai
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pai.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CivilID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CivilID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataNascimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstadoCivil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstadoCivil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nacionalidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nacionalidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concelho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concelho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Freguesia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Freguesia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereço)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereço)
+        </dd>
+
+    </dl>
+</div>
+<p>
+
+    @if (Request.IsAuthenticated && User.IsInRole("Instituicoes"))
+    {@Html.ActionLink("Voltar", "Index", "User_Instituicoes", null, null)}
+    else { @Html.ActionLink("Voltar", "Index", "Instituicoes",null,null)}
+</p>

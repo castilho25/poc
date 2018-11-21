@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SFC.Models.UserProfiles.Instituicoes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Intituições</h2>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <p>@Html.ActionLink("Lista de Instituições não aprovadas", "NotAproved")</p>
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+        Procurar por nome: @Html.TextBox("SearchString")
+        @Html.DropDownList("ID", (SelectList)ViewBag.Search, new { @id = "ID", @searchType = "SearchType" })
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        <th>@Html.DisplayNameFor(model => model.Concelho)</th>
+        <th>@Html.DisplayNameFor(model => model.Freguesia)</th>
+        <th>@Html.DisplayNameFor(model => model.Endereco)</th>
+        <th>@Html.DisplayNameFor(model => model.TipoInstituicao)</th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Nome) </td>
+        <td> @Html.DisplayFor(modelItem => item.Concelho)</td>
+        <td>@Html.DisplayFor(modelItem => item.Freguesia)</td>
+        <td> @Html.DisplayFor(modelItem => item.Endereco)</td>
+        <td> @Html.DisplayFor(modelItem => item.TipoInstituicao)</td>
+        <td>
+            @Html.ActionLink("Detalhes", "Details", new { id = item.InstituicaoID }) 
+            <br />
+            @if (Request.IsAuthenticated && User.IsInRole("Pais"))
+            {
+                @Html.ActionLink("Registar Filho", "RegistarFilho" , "User_Pais", new { id = item.InstituicaoID }, null)
+            }
+            @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Editar Instituição", "Edit", new { id = item.InstituicaoID })
+                <br />
+                @Html.ActionLink("Ver avaliações", "Avaliacoes", new { id = item.InstituicaoID })
+                <br />
+                @Html.ActionLink("Ver pedido registo de alunos", "PedidoRegistoAlunos", new { id = item.InstituicaoID })
+                <br />
+                @Html.ActionLink("Ver alunos registados", "AlunosRegistados", new { id = item.InstituicaoID })
+            }
+        </td>
+    </tr>
+}
+
+</table>

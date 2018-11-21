@@ -1,0 +1,41 @@
+﻿@model SFC.Models.SFC.Paiis.Filhos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes do Filho - @Html.DisplayFor(model => model.Name)</h2>
+
+<div>
+    <hr />
+    <h3>Instituição</h3>
+    @if (Model.Instituicao == null)
+    {
+        <h5>@Html.DisplayFor(model => model.Name) não se encontra registado numa Instituição</h5>
+    }
+    else
+    {
+        <h5>@Html.DisplayFor(model => model.Name) registado em @Html.DisplayFor(model => model.Instituicao.Nome)</h5>
+    }
+    <br />
+    <h3>Pedidos de registo a Instituições</h3>
+    <table class="table">
+        <tr>
+            <th>Instituição</th>
+            <th>Estado de Aprovação</th>
+        </tr>
+        @foreach (var registo in ViewBag.Registos)
+        {
+            <tr>
+                <td>@registo.Instituicao.Nome</td>
+                <td>@registo.Aproved</td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+    { @Html.ActionLink("Voltar", "Index")}
+    @if (Request.IsAuthenticated && User.IsInRole("Pais"))
+    {@Html.ActionLink("Voltar", "Index","User_Pais",null,null)}
+</p>

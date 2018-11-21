@@ -1,0 +1,94 @@
+﻿@model SFC.Models.UserProfiles.Instituicoes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes da Instituição - @Html.DisplayFor(model => model.Nome)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Concelho)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Concelho)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Freguesia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Freguesia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoInstituicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoInstituicao)
+        </dd>
+        <dt>
+            Tipo de Ensino
+        </dt>
+        @foreach(var item in Model.TipoEnsino)
+        {
+            <dd>- @Html.DisplayFor(modelItem => item.Nome)</dd>
+        }
+        <dt>@Html.DisplayNameFor(model => model.Detalhe.Missao)</dt>
+        <dd>@Html.DisplayFor(model => model.Detalhe.Missao)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Detalhe.Visao)</dt>
+        <dd>@Html.DisplayFor(model => model.Detalhe.Visao)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Detalhe.Historia)</dt>
+        <dd>@Html.DisplayFor(model => model.Detalhe.Historia)</dd>
+        <h4>Atividades Registadas</h4>
+        <hr />
+        @foreach(var atividade in Model.Detalhe.Atividades)
+        {
+            <dt>Nome</dt>
+            <dd>@atividade.Nome</dd>
+            <dt>Descrição</dt>
+            <dd>@atividade.Descricao</dd>
+            <dt>Inicio - Fim</dt>
+            <dd>@atividade.InicioAtividade - @atividade.FimAtividade</dd>
+            if (Request.IsAuthenticated && User.IsInRole("Instituicoes"))
+            {
+                if (DateTime.Compare(DateTime.Now.Date, @atividade.InicioAtividade) < 0)
+                {
+                    <dd>@Html.ActionLink("Editar Atividade", "EditarAtividade", "User_Instituicoes", new { id = atividade.AtividadeID },null)</dd>
+                }
+            }
+            <hr />
+        }
+
+      </dl>
+</div>
+<p>
+    @if (Request.IsAuthenticated && User.IsInRole("Pais")){@Html.ActionLink("Lista de Instiuições", "Index") <br />}
+    @if (Request.IsAuthenticated && User.IsInRole("Admin")){
+        @Html.ActionLink("Lista de Instiuições", "Index") <br />
+        @Html.ActionLink("Lista de Instiuições Não Aprovadas", "NotAproved") <br />}
+    
+</p>

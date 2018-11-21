@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SFC.Models.UserProfiles.Instituicoes>
+
+@{
+    ViewBag.Title = "NotAproved";
+}
+
+<h2>Instituições não Aprovadas</h2>
+
+<div class="form-actions no-color">
+    @Html.ActionLink("Instituições Aprovadas", "")
+</div>
+<br />
+<table class="table">
+
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Nome)</th>
+
+        <th>@Html.DisplayNameFor(model => model.Concelho)</th>
+        
+        <th>@Html.DisplayNameFor(model => model.Freguesia)</th>
+
+        <th>@Html.DisplayNameFor(model => model.Endereco)</th>
+
+        <th>@Html.DisplayNameFor(model => model.TipoInstituicao)</th>
+        
+        <th>Opções</th>
+    </tr>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+        <td>@Html.DisplayFor(modelItem => item.Concelho)</td>
+        <td>@Html.DisplayFor(modelItem => item.Freguesia)</td>
+        <td>@Html.DisplayFor(modelItem => item.Endereco)</td>
+        <td>@Html.DisplayFor(modelItem => item.TipoInstituicao)</td>
+        <td>
+            @Html.ActionLink("Ver Detalhes", "Details", new { id = item.InstituicaoID }) <br />
+            @Html.ActionLink("Aprovar Instituição", "Aproved", new { id = item.InstituicaoID })
+        </td>
+    </tr>
+}
+</table>

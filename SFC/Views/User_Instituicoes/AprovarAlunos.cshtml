@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SFC.Models.SFC.Inst.RegistoFilhos>
+
+@{
+    ViewBag.Title = "AprovarAlunos";
+}
+
+<h2>Pedido de Registo de Alunos</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Filhos.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aproved)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @if ((int)item.Aproved == 2)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Filhos.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aproved)
+            </td>
+            <td>
+                @Html.ActionLink("Aprovar/Recusar", "AprovedAluno", new { id = item.RegistoID })
+            </td>
+        }
+    </tr>
+}
+
+</table>

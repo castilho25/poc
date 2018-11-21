@@ -1,0 +1,90 @@
+﻿@model SFC.Models.UserProfiles.Pais
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{<h2>Detalhes do Pai - @Html.DisplayFor(model => model.Name)</h2>}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.CivilID)</dt>
+        <dd>@Html.DisplayFor(model => model.CivilID)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DataNascimento)</dt>
+        <dd>@Html.DisplayFor(model => model.DataNascimento)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Nacionalidade)</dt>
+        <dd>@Html.DisplayFor(model => model.Nacionalidade)</dd>
+        
+        <dt>@Html.DisplayNameFor(model => model.Profissao)</dt>
+        <dd>@Html.DisplayFor(model => model.Profissao)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Contacto)</dt>
+        <dd>@Html.DisplayFor(model => model.Contacto)</dd>
+
+        <dt> @Html.DisplayNameFor(model => model.Endereco)</dt>
+        <dd>@Html.DisplayFor(model => model.Endereco) </dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Genero)</dt>
+        <dd>@Html.DisplayFor(model => model.Genero)</dd>
+    </dl>
+</div>
+<div>
+    <h4>Filhos</h4>
+    <table class="table">
+        <tr>
+            <th>Nome</th>
+            <th>Identificação</th>
+            <th>Data Nascimento</th>
+            <th>Genero</th>
+            <th>Estado Civil</th>
+            <th>Nacionalidade</th>
+            <th>Concelho</th>
+            <th>Freguesia</th>
+            <th>Endereço</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Filhos)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.CivilID)</td>
+                <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
+                <td>@Html.DisplayFor(modelItem => item.Genero)</td>
+                <td>@Html.DisplayFor(modelItem => item.EstadoCivil)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nacionalidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.Concelho)</td>
+                <td>@Html.DisplayFor(modelItem => item.Freguesia)</td>
+                <td>@Html.DisplayFor(modelItem => item.Endereço)</td>
+                <td>
+                    @Html.ActionLink("Detalhes","Details","Filhos", new { id = item.FilhoID }, null)
+                    <br />
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin")){ @Html.ActionLink("Editar Filho", "EditFilho", new { id = item.FilhoID })}
+                    @if (Request.IsAuthenticated && User.IsInRole("Pais")){
+                        @Html.ActionLink("Editar Filho", "EditFilho", new { id = item.FilhoID })
+                        if(item.Instituicao != null)
+                        {
+                            @Html.ActionLink("Avaliar Instituição", "AvaliarInstituicao", new { FilhoID = item.FilhoID , InstituicaoID = item.Instituicao.InstituicaoID})
+                        }
+                    }
+                </td>
+                
+                
+            </tr>
+        }
+
+    </table>
+</div>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+<p>
+    @Html.ActionLink("Lista de Pais", "Index")
+</p>
+}

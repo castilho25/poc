@@ -1,0 +1,50 @@
+﻿@model SFC.Models.SFC.Inst.RegistoFilhos
+
+@{
+    ViewBag.Title = "RegistarFilho";
+}
+@{
+    List<SFC.Models.SFC.Paiis.Filhos> filhos = ViewBag.Filhos;
+
+    List<SelectListItem> selectList = new List<SelectListItem>();
+    foreach (var f in filhos)
+    {
+        SelectListItem s = new SelectListItem();
+        s.Text = f.Name;
+        s.Value = f.FilhoID.ToString();
+        selectList.Add(s);
+    }
+
+}
+
+
+<h2>Registar Filho na Instituição</h2>
+<h5>@Html.DisplayFor(model => model.Instituicao.Nome)</h5>
+
+<hr />
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Registo</h4>
+        <hr />
+        <label class = "text-danger">@ViewBag.msg</label>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="col-md-4">Selecione Filho a Registar:</label>
+            <div class="col-md-10">
+                @Html.DropDownList("Nome", new SelectList(selectList, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <input type="submit" value="Realizar Pedido de Registo" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index", "Instituicoes", null , null)
+</div>

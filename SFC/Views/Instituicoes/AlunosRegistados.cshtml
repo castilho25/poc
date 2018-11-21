@@ -1,0 +1,31 @@
+﻿@model IEnumerable<SFC.Models.SFC.Inst.Alunos>
+
+@{
+    ViewBag.Title = "AlunosRegistados";
+}
+
+<h2>Alunos Registados</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Filhos.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Filhos.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Detalhes do Aluno", "FilhoDetails","Filhos" ,new { id=item.AlunosID },null)
+        </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>

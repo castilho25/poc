@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SFC.Models.SFC.Mensagens>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Mensagens Lidas</h2>
+@if(ViewBag.NovasMsg != 0){<h5>Têm @ViewBag.NovasMsg para lêr</h5>
+<h5>[@Html.ActionLink("Ver Novas Mensageens", "NaoVistas")]</h5><br />}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataEnvio)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assunto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataEnvio)
+        </td>
+        <td>
+            @Html.ActionLink("Ver Mensagem", "Details", new { id=item.MensagemID }) 
+        </td>
+    </tr>
+}
+
+</table>

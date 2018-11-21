@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SFC.Models.SFC.Paiis.Avaliacoes>
+
+@{
+    ViewBag.Title = "Avaliacoes";
+}
+
+<h2>Avaliações da Instituição - @ViewBag.Name</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Filho.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pais.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nota) (1 - 5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Critica)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Filho.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pais.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Critica)
+        </td>
+        <td>
+            @Html.ActionLink("Detalhe da Avaliação", "Details", new { id=item.AvaliacaoID }) 
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>

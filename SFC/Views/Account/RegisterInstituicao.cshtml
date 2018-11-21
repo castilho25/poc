@@ -1,0 +1,149 @@
+﻿@model IdentitySample.Models.RegisterInstituicaoViewModel
+@{
+    ViewBag.Title = "RegisterInstituicao";
+}
+
+<h2>Realizar registo como Instituição</h2>
+
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+@using (Html.BeginForm())
+{
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h4>Instituicoes</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Concelho, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Concelho, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Concelho, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Freguesia, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Freguesia, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Freguesia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Endereco, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Endereco, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Endereco, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TipoInstituicao, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.TipoInstituicao, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TipoInstituicao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.Creche)
+                            @Html.LabelFor(m => m.Creche)
+                        </div>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.PreEscola)
+                            @Html.LabelFor(m => m.PreEscola)
+                        </div>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.PrimeiroCiclo)
+                            @Html.LabelFor(m => m.PrimeiroCiclo)
+                        </div>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.SegundoCiclo)
+                            @Html.LabelFor(m => m.SegundoCiclo)
+                        </div>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.TerceiroCiclo)
+                            @Html.LabelFor(m => m.TerceiroCiclo)
+                        </div>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.Secundaria)
+                            @Html.LabelFor(m => m.Secundaria)
+                        </div>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.Superior)
+                            @Html.LabelFor(m => m.Superior)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+            }
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            <div class="form-horizontal">
+                <h4>Detalhes (Opcional)</h4>
+                <hr />
+                @Html.LabelFor(model => model.Historia)
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Historia, htmlAttributes: new { @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Historia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.LabelFor(model => model.Missao)
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Missao, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Missao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.LabelFor(model => model.Visao)
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.TextAreaFor(model => model.Visao, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Visao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

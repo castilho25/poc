@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Space For Children</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Space For Children", "Index", "Home", null, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated && User.IsInRole("Pais")){<li>@Html.ActionLink("Perfil", "Index", "User_Pais")</li>}
+                    @if (Request.IsAuthenticated && User.IsInRole("Instituicoes")){<li>@Html.ActionLink("Perfil", "Index", "User_Instituicoes")</li>}
+                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contactos", "Contact", "Home")</li>
+
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>
+                            <a class="nav-link dropdown-toggle" href="~/Views/Instituicoes/Index.cshtml" data-toggle="dropdown" id="dropdown01" aria-haspopup="true" aria-expanded="false">Instituições</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                @Html.ActionLink("Ver Instituições", "Index", "Instituicoes")<br />
+                                @Html.ActionLink("Ver Instituições em Aprovação", "NotAproved", "Instituicoes")<br />
+                            </div>
+                        </li>
+                        <li>@Html.ActionLink("Pais", "Index", "Pais")</li>
+                        <li>@Html.ActionLink("Filhos", "Index", "Filhos")</li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Instituicoes"))
+                    {
+                        <li>@Html.ActionLink("Sistema de Aprovação de Alunos", "AprovarAlunos", "User_Instituicoes")</li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("Pais"))
+                    {
+                        <li>@Html.ActionLink("Ver Instituições", "Index", "Instituicoes")</li>
+                        <li>@Html.ActionLink("Avaliar Instituções","RealizarAvaliacao","User_Pais")</li>
+                    }
+                    @if (Request.IsAuthenticated)
+                    {
+                    <li>
+                        <a class="nav-link dropdown-toggle" href="~/Views/Mensagens/Index.cshtml" data-toggle="dropdown" id="dropdown01" aria-haspopup="true" aria-expanded="false">Mensagens</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            @if (User.IsInRole("Pais")){
+                                @Html.ActionLink("Ver Mensagens", "Index", "Mensagens")<br />
+                            }
+                            @if (User.IsInRole("Instituicoes")){
+                                @Html.ActionLink("Ver Mensagens", "Index", "Mensagens")<br />
+                                @Html.ActionLink("Enviar Mensagem", "EnviarMensagem", "Mensagens")
+                            }
+                            @if (User.IsInRole("Admin")){
+                                @Html.ActionLink("Enviar Mensagem", "EnviarMensagem", "Mensagens")
+                            }
+                        </div>
+                    </li> 
+                    }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Space For Children</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

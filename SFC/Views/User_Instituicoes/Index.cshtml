@@ -1,0 +1,67 @@
+﻿@model SFC.Models.UserProfiles.Instituicoes
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Html.DisplayFor(model => model.Nome)  [@Html.ActionLink("Editar seu Perfil", "Edit", new { id = Model.InstituicaoID})]</h2>
+<h3>@Html.ActionLink("Registar nova Atividade", "CreateAtividade", new { id = Model.InstituicaoID })</h3>
+
+@Html.Partial("~/Views/Instituicoes/Details.cshtml")
+
+
+<h4> Pedido de Registo</h4>
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Aproved</th>
+    </tr>
+    @foreach (var registo in Model.PedidoRegisto)
+    {
+        <tr>
+        @if ((int)registo.Aproved != 2)
+        {
+            <td>@registo.Filhos.Name</td>
+            <td>@registo.Aproved</td>
+        }
+        </tr>
+    }
+</table>
+<hr />
+<h4> Alunos Registados na Instituição</h4>
+<table class="table">
+    <tr>
+        <th>Nome do Aluno</th>
+        <th></th>
+    </tr>
+    @foreach (var aluno in Model.Alunos)
+    {
+        <tr>
+            <td>@aluno.Filhos.Name</td>
+            <td>
+                @Html.ActionLink("Detalhes do aluno", "FilhoDetails", "Filhos" , new { id = @aluno.AlunosID },null)
+                <br />
+                @Html.ActionLink("Enviar Mensagem para o Pai", "Create", "Mensagens" ,new { id = @aluno.Filhos.PaisID }, null)
+            </td>
+        </tr>
+    }
+</table>
+<hr />
+<h4> Avaliações da Instituição</h4>
+<table class="table">
+    <tr>
+        <th>Nome do Pai</th>
+        <th>Nome do Aluno</th>
+        <th>Nota</th>
+        <th>Critica</th>
+    </tr>
+    @foreach (var avaliacao in Model.Avaliacoes)
+    {
+        <tr>
+            <td>@avaliacao.Pais.Name</td>
+            <td>@avaliacao.Filho.Name</td>
+            <td>@avaliacao.Nota</td>
+            <td>@avaliacao.Critica</td>
+        </tr>
+    }
+</table>

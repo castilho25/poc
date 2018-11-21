@@ -1,0 +1,30 @@
+﻿@model SFC.Models.SFC.Inst.RegistoFilhos
+
+@{
+    ViewBag.Title = "AprovedAluno";
+}
+
+<h2>Aprovar/Recusar Aluno</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Filhos.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Filhos.Name)
+        </dd>
+    </dl>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" name="true" value="Aprovar" class="btn btn-default" />
+        <input type="submit" name="false" value="Não Aprovar" class="btn btn-default"/>
+    </div>
+}
+<p>
+    @Html.ActionLink("Voltar", "Index")
+</p>

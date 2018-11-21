@@ -1,0 +1,54 @@
+﻿@model SFC.Models.UserProfiles.Instituicoes
+
+@{
+    ViewBag.Title = "Aproved";
+}
+
+<div>
+    <h4>Têm a certeza que aprovar a seguinte instituição ?</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Concelho)</dt>
+        <dd>@Html.DisplayFor(model => model.Concelho)</dd>
+
+        <dt> @Html.DisplayNameFor(model => model.Freguesia)</dt>
+        <dd>@Html.DisplayFor(model => model.Freguesia)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Endereco)</dt>
+        <dd>@Html.DisplayFor(model => model.Endereco)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.TipoInstituicao)</dt>
+        <dd>@Html.DisplayFor(model => model.TipoInstituicao)</dd>
+        <dt>Tipo de Ensino</dt>
+        @foreach (var item in Model.TipoEnsino){
+            <dd>@Html.DisplayFor(modelItem => item.Nome)</dd>
+        }
+    </dl>
+    <div>
+        Detalhes da Instituição @Html.DisplayFor(model => model.Nome)
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Detalhe.Missao)</dt>
+            <dd>@Html.DisplayFor(model => model.Detalhe.Missao)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Detalhe.Visao)</dt>
+            <dd>@Html.DisplayFor(model => model.Detalhe.Visao)</dd>
+
+            <dt>@Html.DisplayNameFor(model => model.Detalhe.Historia)</dt>
+            <dd>@Html.DisplayFor(model => model.Detalhe.Historia)</dd>
+        </dl>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Aprovar" class="btn btn-default" /> |
+            @Html.ActionLink("Lista de Instituições Não Aprovadas", "NotAproved")
+        </div>
+    }
+</div>
+

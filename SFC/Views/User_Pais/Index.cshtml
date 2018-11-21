@@ -1,0 +1,10 @@
+﻿@model SFC.Models.UserProfiles.Pais
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Html.DisplayFor(model => model.Name)  [@Html.ActionLink("Editar seu Perfil", "Edit", new { id = Model.PaisID })]</h2>
+<h3>@Html.ActionLink("Registar novo Filho", "Create", new { id = Model.PaisID })</h3>
+
+@Html.Partial("~/Views/Pais/Details.cshtml")
